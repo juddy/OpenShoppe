@@ -1,0 +1,3 @@
+/home/pos/JavaPOS//jpos1122-controls.jar
+/home/pos/JavaPOS//jpos1122.jar
+/home/pos/JavaPOS//jpos.properties

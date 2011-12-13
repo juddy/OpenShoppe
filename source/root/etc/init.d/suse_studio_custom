@@ -1,0 +1,44 @@
+#!/bin/bash
+#
+# This script is executed whenever your appliance boots.  Here you can add
+# commands to be executed before the system enters the first runlevel.  This
+# could include loading kernel modules, starting daemons that aren't managed
+# by init files, asking questions at the console, etc.
+#
+# The 'kiwi_type' variable will contain the format of the appliance (oem =
+# disk image, vmx = VMware, iso = CD/DVD, xen = Xen).
+#
+
+# read in some variables
+. /studio/profile
+
+if [ -f /etc/init.d/suse_studio_firstboot ]
+then
+  
+  # Put commands to be run on the first boot of your appliance here
+  echo "Running SUSE Studio first boot script..."
+
+
+sleep 2 ; clear
+
+echo "Setting ownership for FreeMercator"
+chown -R pos:users /opt/freemercator/
+chown admin:users /opt/freemercator/bin/admin.sh
+
+echo "###########################################"
+#echo " - Setting up IS4C/Fannie..."
+#   echo "  + Changing Apache Document Root.."
+#  echo "  +- /etc/apache2/sites-available/default"
+# echo "  + chmod 655 /pos/installation/server_db-install ; /pos/installation/server_db-install"
+# chmod 655 /pos/installation/lane_db-install ; sh /pos/installation/lane_db-install
+#echo "###########################################"
+
+echo " Neutering First Boot script.."
+echo "mv /etc/init.d/suse_studio_firstboot /etc/init.d/suse_studio_firstboot.neutered.$$"
+mv /etc/init.d/suse_studio_firstboot /etc/init.d/suse_studio_firstboot.neutered.$$
+echo "###########################################"
+
+
+echo -e "\n\n\n\n\n**************\n      Running SaX2\n*****************\n"
+SaX2
+fi

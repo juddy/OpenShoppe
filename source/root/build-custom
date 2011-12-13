@@ -1,0 +1,69 @@
+#!/bin/bash
+#
+# This script is executed at the end of appliance creation.  Here you can do
+# one-time actions to modify your appliance before it is ever used, like
+# removing files and directories to make it smaller, creating symlinks,
+# generating indexes, etc.
+#
+# The 'kiwi_type' variable will contain the format of the appliance (oem =
+# disk image, vmx = VMware, iso = CD/DVD, xen = Xen).
+#
+
+# read in some variables
+. /studio/profile
+
+
+
+sed -i '/^$/d' /etc/issue
+echo -e "OpenLPOS - Client - $(date)\n" >> /etc/issue
+
+cat >> /etc/issue << EOF
+ *******   ******** ****     ****   *******  
+/**////** /**///// /**/**   **/**  **/////** 
+/**    /**/**      /**//** ** /** **     //**
+/**    /**/******* /** //***  /**/**      /**
+/**    /**/**////  /**  //*   /**/**      /**
+/**    ** /**      /**   /    /**//**     ** 
+/*******  /********/**        /** //*******  
+///////   //////// //         //   ///////   
+
+----------------------------------------------
+USEFUL THINGS TO DO:
+- POS Software lives in '/opt'
+- Login as root or admin and run '/opt/AdminMenu/adminmenu'
+- Setup LAN: 'yast2 lan' as root
+- Install IS4C/Fannie: '/pos/lanedb_install.sh'
+
+LOGIN as root, admin, or pos user 
+with password available online @ http://openlpos.org
+----------------------------------------------
+EOF
+
+#chown -R root:users /opt/freemercator
+
+chkconfig apache2 on
+chkconfig mysql on
+
+# Remove unwanted cruft
+
+# Temporarily back-up the desired gnome and xscreensaver resources - then extract after deletion.
+tar -cvf /opt/OLPOS-screensaver-and-GTK-appearance.tar /usr/share/themes/G* /usr/lib/xscreensaver/barcode /usr/share/themes/OpenLPOS-GTK-Theme
+rm -rf /usr/lib/xscreensaver/* /usr/share/themes/*
+echo "Removing excess GTK and Xscreensaver resources.."
+tar -C / -xvf /opt/OLPOS-screensaver-and-GTK-appearance.tar
+chown -R admin:users /usr/share/themes/
+
+rm -rf /usr/share/icons/default
+ln -s /usr/share/icons/OpenLPOS2009 /usr/share/icons/default
+
+echo "Done"
+
+##########################
+# Users and Perms
+chown -R admin:users /home/admin
+chown -R pos:users /home/pos
+
+
+rm -rf /home/admin/.bash_history
+rm -rf /home/pos/.bash_history
+rm -rf /root/.bash_history

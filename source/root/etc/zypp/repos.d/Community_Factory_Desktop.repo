@@ -1,0 +1,7 @@
+[Community_Factory_Desktop]
+name=Community_Factory_Desktop
+baseurl=http://download.opensuse.org/repositories/KDE:/KDE4:/Community/openSUSE_11.2_KDE4_Factory_Desktop
+type=rpm-md
+enabled=1
+autorefresh=1
+gpgcheck=1

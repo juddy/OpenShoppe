@@ -1,0 +1,10 @@
+git config --global user.name "W. J. Kennedy"
+git config --global user.email wjkennedy@openlpos.org
+      
+git init
+#touch README
+
+git add README
+git commit -m 'OpenShoppe v0.6 Kiwi source export via Suse Studio'
+git remote add origin git@github.com:juddy/OpenShoppe.git
+git push -u origin master

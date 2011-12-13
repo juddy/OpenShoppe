@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Start OFBiz POS
+cd /opt/ofbiz-rel4.0-current ; java -jar ofbiz.jar -pos &
+

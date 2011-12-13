@@ -1,0 +1,7 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=4c51d8a8ca30405ed3f4b6c91ba2327e
+Comment=Start OFBiz POS
+Exec=cd /opt/ofbiz-rel4.0-current ; java -jar ofbiz.jar -pos
+Terminal=false
+Type=Application

@@ -1,0 +1,7 @@
+[Packman_for_11.3]
+name=Packman_for_11.3
+baseurl=http://packman.unixheads.com/suse/11.3
+type=rpm-md
+enabled=1
+autorefresh=1
+gpgcheck=1

@@ -1,0 +1,7 @@
+[Wireless_firmware]
+name=Wireless_firmware
+baseurl=http://download.opensuse.org/repositories/home:/schmolle1980/openSUSE_11.0_Update/
+type=rpm-md
+enabled=1
+autorefresh=1
+gpgcheck=1

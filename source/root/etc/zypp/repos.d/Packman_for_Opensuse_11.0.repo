@@ -1,0 +1,7 @@
+[Packman_for_Opensuse_11.0]
+name=Packman_for_Opensuse_11.0
+baseurl=http://ftp.skynet.be/pub/packman/suse/11.0/
+type=rpm-md
+enabled=1
+autorefresh=1
+gpgcheck=1

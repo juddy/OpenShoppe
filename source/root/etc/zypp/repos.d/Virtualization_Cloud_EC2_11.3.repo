@@ -1,0 +1,7 @@
+[Virtualization:Cloud:EC2_11.3]
+name=Virtualization:Cloud:EC2_11.3
+baseurl=http://download.opensuse.org/repositories/Virtualization:/Cloud:/EC2/openSUSE_11.3
+type=rpm-md
+enabled=1
+autorefresh=1
+gpgcheck=1

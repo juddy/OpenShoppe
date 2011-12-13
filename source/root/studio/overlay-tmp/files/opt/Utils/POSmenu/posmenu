@@ -1,0 +1,308 @@
+#!/bin/bash
+#
+# QnD POS Tool menu
+# OpenLPOS.org
+# wjkennedy@openlpos.org
+# Sun Apr 26 11:53:13 UTC 2009
+#
+###########################
+
+
+# Yuck code - to be refactored into common POS functions..
+
+OSK="gok"
+
+TSCAL_DIR="/home/admin/Utils"
+if [ -z "$DISPLAY" ]
+then
+    echo "Using console mode. Not all functions are available."
+    DIALOG="dialog"
+else
+    DIALOG="Xdialog"
+fi
+
+tempfile="$(pwd)/posmenu-tempfile.$$"
+tsvendor="$(pwd)/ts-vendor.$$"
+touch $tsvendor
+touch $tempfile
+
+
+###########################################
+DoCalib(){
+$DIALOG --msgbox "Ready to Calibrate touchscreen on $TS_TTY" 0 0
+
+#execute
+$TSCAL_CMD /dev/$TS_TTY
+
+}
+
+
+###########################################
+GetTTY(){
+grep ttyS /var/log/messages
+
+if [ $? -ne "0" ]
+then
+    $DIALOG --msgbox "Configuring for USB serial ports.  No regular ports are found."
+fi
+
+$DIALOG --title "OpenLPOS POS Calibrator" \
+        --menu "Please choose a Serial Port:" 35 75 10 \
+        "ttyUSB0" "/dev/ttyUSB0"\
+        "ttyUSB1" "/dev/ttyUSB1"\
+        "ttyUSB2" "/dev/ttyUSB2"\
+        "ttyUSB3" "/dev/ttyUSB3"\
+        "ttyUSB4" "/dev/ttyUSB4"\
+        "ttyS0" "Standard serial port (COM1)" \
+        "ttyS1" "Standard serial port (COM2)" \
+        "ttyS2" "Standard serial port (COM3)" \
+        "ttyS3" "Standard serial port (COM4)" \
+        "ttyS4" "Standard serial port (COM5)"  2> $tempfile
+
+return_value=$?
+
+choice=`cat $tempfile`
+
+case $return_value in
+  0)
+    case $choice in
+        "ttyUSB0")
+            $DIALOG  --msgbox "TS_TTY=$choice" 5 40
+            TS_TTY=$choice
+            DoCalib
+        ;;
+        "ttyUSB1")
+            $DIALOG  --msgbox "TS_TTY=$choice" 5 40
+            TS_TTY=$choice
+            DoCalib
+        ;;
+        "ttyUSB2")
+            $DIALOG  --msgbox "TS_TTY=$choice" 5 40
+            TS_TTY=$choice
+            DoCalib
+        ;;
+        "ttyUSB3")
+            $DIALOG  --msgbox "TS_TTY=$choice" 5 40
+            TS_TTY=$choice
+            DoCalib
+        ;;
+        "ttyUSB4")
+            $DIALOG  --msgbox "TS_TTY=$choice" 5 40
+            TS_TTY=$choice
+            DoCalib
+        ;;
+        "ttyUSB5")
+            $DIALOG  --msgbox "TS_TTY=$choice" 5 40
+            TS_TTY=$choice
+            DoCalib
+        ;;
+        "ttyS0")
+            $DIALOG  --msgbox "TS_TTY=$choice" 5 40
+            TS_TTY=$choice
+            DoCalib
+        ;;
+        "ttyS1")
+            $DIALOG  --msgbox "TS_TTY=$choice" 5 40
+            TS_TTY=$choice
+            DoCalib
+        ;;
+        "ttyU2")
+            $DIALOG  --msgbox "TS_TTY=$choice" 5 40
+            TS_TTY=$choice
+            DoCalib
+        ;;
+        "ttyS3")
+            $DIALOG  --msgbox "TS_TTY=$choice" 5 40
+            TS_TTY=$choice
+            DoCalib
+        ;;
+        "ttyS4")
+            $DIALOG  --msgbox "TS_TTY=$choice" 5 40
+            TS_TTY=$choice
+            DoCalib
+        ;;
+        "ttyS5")
+            $DIALOG  --msgbox "TS_TTY=$choice" 5 40
+            TS_TTY=$choice
+            DoCalib
+        ;;
+        *)
+            GetTSTYPE 
+        ;;
+esac
+    ;;
+
+    255)
+       do_menu
+    ;;
+
+    *)
+        do_menu
+    ;; 
+esac
+}
+
+
+StatSerial(){
+for i in 0 1 2 3 4
+do
+    statserial /dev/ttyS$i | tee -a serial.out.$$
+
+done
+$DIALOG --title "OpenLPOS POS Calibrator"
+}
+
+#########################################
+GetTSType(){
+$DIALOG --title "OpenLPOS POS Calibrator" \
+        --menu "Please choose a Touchscreen model:" 15 55 3 \
+        "EloTouch" "EloGraphics(R) IntelliTouch E281-2310" \
+        "Microtouch" "SMT3 -Serial only-" \
+        "Other"  "Try to calibrate touchscreen with" 2> $tempfile
+
+return_value=$?
+
+choice=`cat $tempfile`
+
+case $return_value in
+  0)
+    case $choice in
+        "EloTouch")
+            $DIALOG  --msgbox "TSCAL_CMD=$TSCAL_DIR/touchcal e $TS_TTY" 5 40
+            TSCAL_CMD="$TSCAL_DIR/touchcal e"
+            GetTTY
+        ;;
+        
+        "Microtouch")
+            $DIALOG  --msgbox "TSCAL_CMD=$TSCAL_DIR/touchcal m $TS_TTY" 5 40
+            TSCAL_CMD="$TSCAL_DIR/touchcal m"
+            GetTTY
+        ;;
+        
+        "Other")
+            $DIALOG --msgbox "TSCAL_CMD=$TSCAL_DIR/touchcal l $TS_TTY" 5 40
+            TSCAL_CMD="$TSCAL_DIR/touchcal l"
+            GetTTY
+        ;;
+    esac
+    ;;
+
+    255)
+       do_menu
+    ;;
+
+    *)
+        do_menu
+    ;; 
+esac
+}
+#########################################
+
+
+######################################
+# Main Menu
+do_menu(){
+$DIALOG --title "OpenLPOS POS Menu" \
+        --menu "Please choose a POS function:\n<CTRL-C> to exit to shell.\n\nPress <ALT> + the letter of the funtion to run, or select with Arrow keys." 20 80 7 \
+        "OFBiz" "Start OFBiz Java POS app"\
+        "POSTest" "Check JavaPOS Drivers and Devices" \
+        "FreeMercator" "Run FreeMercator" \
+        "FMAdmin" "FreeMercator Admin Mode" \
+        "Keyboard" "Display onscreen keyboard" \
+	"POSCursor" "Set cursor to touch-frendly layout."\
+        "Calibrate"  "Calibrate touchscreen with 'touchcal'" 2> $tempfile
+}
+#############################################
+
+
+
+# Here lies the "Nitty Gritty"
+do_menu
+
+return_value=$?
+choice=$(cat $tempfile)
+rm -rf $tempfile
+
+case $return_value in
+  0)
+    echo "Running '$choice'..."
+    case $choice in
+        "POSTest")
+            if [ ! -z $DISPLAY ]
+            then
+                    cd /opt/POSTest
+                    sh POStest.sh
+            else
+                    $DIALOG --msgbox "Sorry - can't run $choice without X." 0 0
+                    do_menu
+            fi
+         ;;
+         
+        "FreeMercator")
+            if [ ! -z $DISPLAY ]
+            then
+                    cd /opt/freemercator/bin
+                    sh run.sh
+            else
+                    $DIALOG --msgbox "Sorry - can't run $choice without X." 0 0
+                    do_menu
+            fi
+        ;;
+
+        "FMAdmin")
+            if [ ! -z $DISPLAY ]
+            then
+                    cd /opt/freemercator/bin
+                    sh admin.sh
+            else
+                    $DIALOG --msgbox "Sorry - can't run $choice without X." 0 0
+                    do_menu
+            fi
+        ;;
+
+	"OFBizPOS")
+		if [ ! -z $DISPLAY ]
+		then
+			cd /opt/ofbiz-release4.0/
+			java -jar ofbiz.jar -pos &
+			do_menu
+		else
+
+                    $DIALOG --msgbox "Sorry - can't run $choice without X." 0 0
+                    do_menu
+		fi
+	;;
+
+        "Keyboard")
+            $DIALOG --msgbox -timeout 1 "Running $OSK..." 0 0
+            # Run the Onscreen keyboard mentioned above
+            $OSK & do_menu
+        ;;
+
+	"POSCursor")
+		if [ ! -z $DISPLAY ]
+		then
+			cd /opt/POS-Cursor/
+			./set_pos_cursor
+			$DIALOG --msgbox "Using POS touch pointer cursor.\nThis will reset to default upon exit." 0 0
+			do_menu
+		else
+
+                    $DIALOG --msgbox "Sorry - can't run $choice without X." 0 0
+                    do_menu
+		fi
+	;;
+
+
+        "Calibrate")
+            #GetTSTTY
+            GetTSType
+        ;;
+     esac
+    ;;
+  1)
+    exit 0 ;;
+  255)
+    exit 1 ;;
+esac
+

@@ -1,0 +1,7 @@
+[driver:wireless]
+name=driver:wireless
+baseurl=http://ftp5.gwdg.de/pub/opensuse/repositories/driver:/wireless/11.0-update/
+type=rpm-md
+enabled=1
+autorefresh=1
+gpgcheck=1

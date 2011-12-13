@@ -1,0 +1,7 @@
+[Security_11.3]
+name=Security_11.3
+baseurl=http://ftp5.gwdg.de/pub/opensuse/repositories/security/openSUSE_11.3
+type=rpm-md
+enabled=1
+autorefresh=1
+gpgcheck=1

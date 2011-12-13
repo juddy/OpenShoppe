@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+# OpenLPOS POS Client Cursor installer
+# Suitable for touch displays
+#
+#######################################
+
+xmessage -timeout 1 "Setting X cursor.."
+xsetroot -cursor /opt/POS-Cursor/fingerprint_cursor.xbm /opt/POS-Cursor/fingerprint_cursor.xbm
+exit 0

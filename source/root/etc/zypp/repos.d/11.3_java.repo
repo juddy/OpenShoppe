@@ -1,0 +1,7 @@
+[11.3_java]
+name=11.3_java
+baseurl=http://download.opensuse.org/repositories/Java:/packages/openSUSE_11.3
+type=rpm-md
+enabled=1
+autorefresh=1
+gpgcheck=1

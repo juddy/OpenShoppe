@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<image name='OpenShoppe' displayname='OpenShoppe' schemeversion='2.4'>
+  <description type='system'>
+    <author>itomato</author>
+    <contact>studio-devel@suse.de</contact>
+    <specification>
+      A basic openSUSE 11.1 system, with an X-Server providing a minimal
+      graphical user interface.
+    </specification>
+  </description>
+  <preferences>
+    <oem-swap>yes</oem-swap>
+    <oem-swapsize>512</oem-swapsize>
+    <oem-home>no</oem-home>
+    <oem-boot-title>OpenShoppe</oem-boot-title>
+    <type filesystem='ext3' checkprebuilt='true' fsnocheck='true' boot='oemboot/suse-11.3'>oem</type>
+    <version>0.0.7</version>
+    <packagemanager>zypper</packagemanager>
+    <rpm-check-signatures>False</rpm-check-signatures>
+    <rpm-force>False</rpm-force>
+    <boot-theme>studio</boot-theme>
+    <locale>en_US</locale>
+  </preferences>
+  <users group='root'>
+    <user name='root' pwd='$1$7rjwqpbS$Q730TG9dEwicvai0HoY18/' shell='/bin/bash' home='/root'/>
+  </users>
+  <users group='users'>
+    <user name='admin' pwd='$1$kGSOZhHV$GweiaGEN.FhA3ejWOYNWe/' shell='/bin/bash' home='/home/admin'/>
+    <user name='pos' pwd='$1$bJJfS6Nr$HGMbM575eEtBvYr7fzNxQ.' shell='/bin/bash' home='/home/pos'/>
+  </users>
+  <packages patternType='onlyRequired' type='image' patternPackageType='onlyRequired'>
+    <opensusePattern name='base'/>
+    <opensusePattern name='x11'/>
+    <opensusePattern name='yast2_basis'/>
+    <opensusePattern name='console'/>
+    <opensusePattern name='tabletpc'/>
+    <package name='ConsoleKit-x11'/>
+    <package name='xorg-x11-fonts'/>
+    <package name='xorg-x11-driver-video'/>
+    <package name='yast2-qt-pkg'/>
+    <package name='yast2-qt-graph'/>
+    <package name='yast2-ncurses-pkg'/>
+    <package name='dhcp-server'/>
+    <package name='gok-devel'/>
+    <package name='xorg-x11-server-extra'/>
+    <package name='xorg-x11-driver-input'/>
+    <package name='udev-configure-printer'/>
+    <package name='kiwi'/>
+    <package name='kiwi-tools'/>
+    <package name='kde4-lemonpos'/>
+    <package name='SuSEfirewall2'/>
+    <package name='zypper'/>
+    <package name='vim'/>
+    <package name='less'/>
+    <package name='yast2'/>
+    <package name='yast2-ncurses'/>
+    <package name='mdadm'/>
+    <package name='yast2-firstboot'/>
+    <package name='xorg-x11-server'/>
+    <package name='x11-tools'/>
+    <package name='dbus-1-x11'/>
+    <package name='wmakerconf'/>
+    <package name='apache2'/>
+    <package name='apache2-mod_php5'/>
+    <package name='dhcp'/>
+    <package name='yast2-sshd'/>
+    <package name='sshfs'/>
+    <package name='java-1_6_0-sun'/>
+    <package name='yast2-live-installer'/>
+    <package name='yast2-qt'/>
+    <package name='MozillaFirefox'/>
+    <package name='kernel-default'/>
+    <package name='kernel-default-base'/>
+    <package name='nfs-kernel-server'/>
+    <package name='WindowMaker'/>
+    <package name='cups-drivers'/>
+    <package name='cups'/>
+    <package name='gnome-cups-manager'/>
+    <package name='Xdialog'/>
+    <package name='dialog'/>
+    <package name='atftp'/>
+    <package name='syslinux'/>
+    <package name='dhcp-client'/>
+    <package name='dhcpcd'/>
+    <package name='WindowMaker-applets'/>
+    <package name='perl-AppConfig'/>
+    <package name='keytouch'/>
+    <package name='keytouch-editor'/>
+    <package name='x11-input-evtouch'/>
+    <package name='festival'/>
+    <package name='dos2unix'/>
+    <package name='xorg-x11-driver-virtualbox-ose'/>
+    <package name='yast2-branding-openSUSE'/>
+    <package name='xkeycaps'/>
+    <package name='hal'/>
+    <package name='statserial'/>
+    <package name='gnome-speech'/>
+    <package name='barcode'/>
+    <package name='java-1_6_0-openjdk'/>
+    <package name='rsync'/>
+    <package name='bootchart'/>
+    <package name='xscreensaver'/>
+    <package name='gcc'/>
+    <package name='make'/>
+    <package name='keyutils'/>
+    <package name='strace'/>
+    <package name='ltrace'/>
+    <package name='zenity'/>
+    <package name='usbutils'/>
+    <package name='usb_modeswitch'/>
+    <package name='usbview'/>
+    <package name='gok'/>
+    <package name='cellwriter'/>
+    <package name='x11-input-fujitsu'/>
+    <package name='wacom-kmp-default'/>
+    <package name='xournal'/>
+    <package name='xstroke'/>
+    <package name='xvkbd'/>
+    <package name='abiword'/>
+    <package name='gdm'/>
+    <package name='mysql-community-server-tools'/>
+    <package name='mysql-community-server'/>
+    <package name='sax2-tools'/>
+    <package name='xorg-x11-driver-video-unichrome'/>
+    <package name='libgcc45'/>
+    <package name='nagios-nrpe'/>
+    <package name='speech-dispatcher'/>
+    <package name='glib2-branding-openSUSE'/>
+    <package name='icewm'/>
+    <package name='squashfs'/>
+    <package name='cromfs'/>
+    <archive name='bootsplash.tar' bootinclude='true'/>
+    <archive name='gdm.tar'/>
+  </packages>
+  <packages type='bootstrap'>
+    <package name='filesystem'/>
+    <package name='glibc-locale'/>
+  </packages>
+  <repository type='yast2'>
+    <source path='http://download.opensuse.org/distribution/11.0/repo/oss/'/>
+  </repository>
+  <repository type='rpm-md'>
+    <source path='http://ftp.skynet.be/pub/packman/suse/11.0/'/>
+  </repository>
+  <repository type='rpm-md'>
+    <source path='http://download.opensuse.org/repositories/network:/utilities/openSUSE_11.0/'/>
+  </repository>
+  <repository type='rpm-md'>
+    <source path='http://download.opensuse.org/repositories/home:/schmolle1980/openSUSE_11.0_Update/'/>
+  </repository>
+  <repository type='rpm-md'>
+    <source path='http://download.opensuse.org/repositories/editors/openSUSE_11.0'/>
+  </repository>
+  <repository type='rpm-md'>
+    <source path='http://ftp5.gwdg.de/pub/opensuse/repositories/driver:/wireless/11.0-update/'/>
+  </repository>
+  <repository type='rpm-md'>
+    <source path='http://download.opensuse.org/repositories/Java:/packages/openSUSE_11.0'/>
+  </repository>
+  <repository type='rpm-md'>
+    <source path='{itomato openSUSE 11.1}'/>
+  </repository>
+  <repository type='rpm-md'>
+    <source path='http://download.opensuse.org/repositories/KDE:/KDE4:/Community/openSUSE_11.2_KDE4_Factory_Desktop'/>
+  </repository>
+  <repository type='rpm-md'>
+    <source path='{itomato openSUSE 11.2}'/>
+  </repository>
+  <repository type='yast2'>
+    <source path='http://download.opensuse.org/distribution/11.3/repo/oss'/>
+  </repository>
+  <repository type='rpm-md'>
+    <source path='http://download.opensuse.org/repositories/Java:/packages/openSUSE_11.3'/>
+  </repository>
+  <repository type='rpm-md'>
+    <source path='http://packman.unixheads.com/suse/11.3'/>
+  </repository>
+  <repository type='rpm-md'>
+    <source path='http://ftp5.gwdg.de/pub/opensuse/repositories/security/openSUSE_11.3'/>
+  </repository>
+  <repository type='yast2'>
+    <source path='http://download.opensuse.org/distribution/11.3/repo/non-oss'/>
+  </repository>
+  <repository type='rpm-md'>
+    <source path='http://download.opensuse.org/repositories/Virtualization:/Cloud:/EC2/openSUSE_11.3'/>
+  </repository>
+</image>
